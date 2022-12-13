@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Weather | List{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        {% if form.errors%}
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+            <label for="{{form.name.label}}" class="col-form-label">City {{form.name.label}}</label>
+            </div>
+            <div class="col-auto">
+                {{form.name}}
+            </div>
+            <div class="col-auto">
+                <input type="submit" value="Submit" class="btn btn-outline-dark">
+            </div>
+        </div>
+    </form>
+    <div class="row mt-5">
+        <div class="col-8">
+            <h2>Recent Cities</h2>
+        </div>
+    </div>
+    {% if cities %}
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Temperature</th>
+                    <th scope="col">Humidity</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city in cities %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{city.name}}</td>
+                        <td>{{city.temperature}}</td>
+                        <td>{{city.humidity}}</td>
+                        <td>{{city.created_at}}</td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'city_detail' city.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> View </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="card">
+            <div class="card-body">
+                Not found any recent city.
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

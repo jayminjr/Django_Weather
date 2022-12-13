@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Weather | Detail{% endblock title %}
+{% block content %}
+<div class="container m-5 p-5 pt-0">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="pb-4">City Detail</h2>    
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+            <a class="btn btn-success" href="{% url 'home' %}" role="button"><i class="fa fa-list-ol" aria-hidden="true"></i> Home</a>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Name</b>
+            </div>
+            <div class="col">
+                {{object.name}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Temperature</b>
+            </div>
+            <div class="col">
+                {{object.temperature}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Minimum Temperature</b>
+            </div>
+            <div class="col">
+                {{object.min_temp}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Maximum Temperature</b>
+            </div>
+            <div class="col">
+                {{object.max_temp}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Wind Speed</b>
+            </div>
+            <div class="col">
+                {{object.wind_speed}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Humidity</b>
+            </div>
+            <div class="col">
+                {{object.humidity}}
+            </div>
+        </div>
+        <div class="row align-items-start mt-3">
+            <div class="col-4">
+                <b>Last Updated</b>
+            </div>
+            <div class="col">
+                {{object.created_at}}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
